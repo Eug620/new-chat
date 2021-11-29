@@ -51,17 +51,16 @@ const useIsShow = computed(() => {
     ? false
     : overScroll.value;
 });
-provide('useIsShow', useIsShow)
 
 const cacheTop = ref(0);
 const TopOrBootom = ref("bootom");
 const tops = ref(0);
+const clientHeight = document.documentElement.clientHeight;
 
 // scroll event
 const useScrollChange = () => {
   const windowsScrollTop = window.pageYOffset;
   const scrollHeight = document.body.scrollHeight;
-  const clientHeight = document.documentElement.clientHeight;
   tops.value = parseInt(
     (windowsScrollTop / (scrollHeight - clientHeight)) * 100
   );
@@ -88,8 +87,9 @@ onMounted(() => {
 onBeforeMount(() => {
   window.removeEventListener("scroll", useScrollChange);
 });
-
-
+const useTops = computed(() => tops.value)
+provide('useIsShow', useIsShow)
+provide('useTops', useTops)
 </script>
 
 <style lang="scss">

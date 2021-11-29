@@ -1,7 +1,7 @@
 <!--
  * @Author       : Eug
  * @Date         : 2021-11-25 15:23:25
- * @LastEditTime : 2021-11-25 18:29:17
+ * @LastEditTime : 2021-11-29 17:20:33
  * @LastEditors  : Eug
  * @Descripttion : Descripttion
  * @FilePath     : /new-chat/src/components/RightViews/SystemInformation.vue
@@ -46,12 +46,24 @@ PowerWithStateOfCharge((battery) => {
 });
 
 const address = reactive({
-  IP: returnCitySN["cip"],
-  AreaCode: returnCitySN["cid"],
-  Location: returnCitySN["cname"],
-  userAgent: navigator.userAgent,
-  onLine: navigator.onLine ? 'onLine' : 'offLine'
+  IP: null,
+  AreaCode: null,
+  Location: null,
+  userAgent: null,
+  onLine: null
 });
+const useGetAddress = () => {
+  try {
+    address.IP = returnCitySN["cip"]
+    address.AreaCode = returnCitySN["cid"]
+    address.Location = returnCitySN["cname"]
+    address.userAgent = navigator.userAgent
+    address.onLine = navigator.onLine ? 'onLine' : 'offLine'
+  } catch(error) {
+    console.log(error)
+  }
+}
+useGetAddress()
 const Equipment = reactive({
   StateOfCharge: false,
   RemainingPower: 0

@@ -1,8 +1,7 @@
-export const system = {
   /**
    * 系统版本
    */
-  getOsInfo() {
+  const getOsInfo = () => {
     var userAgent = navigator.userAgent.toLowerCase();
     var name = 'Unknown';
     var version = 'Unknown';
@@ -41,11 +40,11 @@ export const system = {
       name = 'Unknown';
     }
     return { name, version };
-  },
+  }
   /**
    * 浏览器版本
    */
-  getExplore() {
+  const getExplore = () => {
     var Sys = {};
     var ua = navigator.userAgent.toLowerCase();
     var s;
@@ -64,8 +63,8 @@ export const system = {
     if (Sys.opera) return { BrowserName:'Opera' ,BrowserVersion: Sys.opera }
     if (Sys.safari) return { BrowserName:'Safari' ,BrowserVersion: Sys.safari }
     return { BrowserName:'未知' ,BrowserVersion: '未知' }
-  },
-  getExploreName() {
+  }
+  const getExploreName = () => {
     var userAgent = navigator.userAgent;
     if (userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) {
       return 'Opera';
@@ -91,13 +90,18 @@ export const system = {
     else {
       return 'Unkonwn';
     }
-  },
+  }
   /**
    * 电量 & 充电状态
    */
-  PowerWithStateOfCharge (cb) {
+  const PowerWithStateOfCharge = (cb) => {
     return navigator.getBattery().then(function(battery) {
       cb(battery)
     })
   }
+export default {
+  getOsInfo,
+  getExplore,
+  getExploreName,
+  PowerWithStateOfCharge
 }

@@ -1,7 +1,7 @@
 /* 
  * @Author       : Eug
  * @Date         : 2021-11-22 11:00:09
- * @LastEditTime : 2021-11-25 14:54:16
+ * @LastEditTime : 2021-11-29 17:16:16
  * @LastEditors  : Eug
  * @Descripttion : Descripttion
  * @FilePath     : /new-chat/vite.config.js
@@ -21,7 +21,16 @@ export default defineConfig({
     }
   },
   server: {
-    port: 5000
+    host: '0.0.0.0',
+    port: 3000,
+    proxy: {
+        '/api': {
+            target: 'http://47.93.229.170:3000',
+            // target: 'http://localhost:3000',
+            changeOrigin: true,
+            rewrite: path => path.replace(/^\/api/, '')
+        }
+    }
   },
   base: './',
   build: {
