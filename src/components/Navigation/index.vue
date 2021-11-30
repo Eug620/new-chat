@@ -3,6 +3,7 @@
     <el-image
       class="ChatLogo"
       :src="Logo"
+      @click="useToHome"
     ></el-image>
     <template v-for="(Navigation, idx) in navigationOptions">
       <template v-if="idx !== navigationOptions.length - 1">
@@ -80,12 +81,13 @@ const HomeStore = useHomeStore();
 const { navigationOptions, getLayoutWidth } = storeToRefs(HomeStore);
 const Router = useRouter();
 const useToHome = () => {
-  Router.push("Home");
+  Router.push("/");
 };
 
 const activeNavigation = ref(navigationOptions.value[0] || "");
 const useChangeActiveNavigation = v => {
   activeNavigation.value = v;
+  useToHome()
 };
 
 // is show right button

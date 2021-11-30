@@ -1,7 +1,7 @@
 /* 
  * @Author       : Eug
  * @Date         : 2021-11-30 11:36:44
- * @LastEditTime : 2021-11-30 12:12:09
+ * @LastEditTime : 2021-11-30 16:06:49
  * @LastEditors  : Eug
  * @Descripttion : Descripttion
  * @FilePath     : /new-chat/src/store/Route/index.js

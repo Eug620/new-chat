@@ -26,7 +26,11 @@
         </router-view>
       </div>
     </div>
-    <el-backtop />
+    <el-backtop :visibility-height="0" @click="useToCreate">
+      <el-icon>
+        <edit></edit>
+      </el-icon>
+    </el-backtop>
   </div>
 </template>
 
@@ -37,7 +41,7 @@ import { useHomeStore } from "/@/store/Home";
 import { useRouteStore } from "/@/store/Route";
 const HomeStore = useHomeStore();
 const RouteStore = useRouteStore()
-const { getRouteMetaIsLabel } = storeToRefs(RouteStore)
+const { getRouteMetaIsLabel, storeRouter: { value } } = storeToRefs(RouteStore)
 
 const {
   getNavigationHeight,
@@ -51,6 +55,10 @@ const {
 const useTopHeight = computed(() => {
   return getRouteMetaIsLabel.value ? getNavigationHeight.value : getTopHeight.value
 })
+
+const useToCreate = () => {
+  value.push('create')
+}
 
 const overScroll = ref(false);
 const useIsShow = computed(() => {
@@ -138,7 +146,7 @@ provide('useTops', useTops)
   &-section {
     padding: 10px;
     box-sizing: border-box;
-    min-height: calc(100vh - v-bind(getNavigationHeight) - v-bind(getClassificationHeight));
+    min-height: calc(100vh - v-bind(useTopHeight));
 
     &-layout {
       width: v-bind(getLayoutWidth);
