@@ -4,7 +4,7 @@
       <div class="chat-container-header-navigation">
         <Navigation />
       </div>
-      <div class="chat-container-header-classification">
+      <div class="chat-container-header-classification" v-if="!getRouteMetaIsLabel">
         <div class="chat-container-header-classification-layout">
           <Classification />
         </div>
@@ -34,7 +34,10 @@
 import { ref, onMounted, onBeforeMount, computed, watch, provide } from "vue";
 import { storeToRefs } from "pinia";
 import { useHomeStore } from "/@/store/Home";
+import { useRouteStore } from "/@/store/Route";
 const HomeStore = useHomeStore();
+const RouteStore = useRouteStore()
+const { getRouteMetaIsLabel } = storeToRefs(RouteStore)
 
 const {
   getNavigationHeight,
@@ -44,6 +47,10 @@ const {
   getTransformNavigationHeight,
   getLayoutWidth
 } = storeToRefs(HomeStore);
+
+const useTopHeight = computed(() => {
+  return getRouteMetaIsLabel.value ? getNavigationHeight.value : getTopHeight.value
+})
 
 const overScroll = ref(false);
 const useIsShow = computed(() => {
@@ -94,7 +101,7 @@ provide('useTops', useTops)
 
 <style lang="scss">
 .chat-container {
-  padding-top: v-bind(getTopHeight);
+  padding-top: v-bind(useTopHeight);
   background-color: #f4f5f5;
 
   .is-show {
@@ -106,7 +113,7 @@ provide('useTops', useTops)
     z-index: 9;
     top: 0;
     width: 100%;
-    height: v-bind(getTopHeight);
+    height: v-bind(useTopHeight);
     background-color: #fff;
     transition: 0.3s all linear;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);

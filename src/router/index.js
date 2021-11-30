@@ -1,7 +1,7 @@
 /* 
  * @Author       : Eug
  * @Date         : 2021-11-22 11:12:01
- * @LastEditTime : 2021-11-23 12:11:19
+ * @LastEditTime : 2021-11-30 12:31:10
  * @LastEditors  : Eug
  * @Descripttion : Descripttion
  * @FilePath     : /new-chat/src/router/index.js
@@ -38,6 +38,12 @@ const routes = [
         name: 'user',
         meta: { keepAlive: true },
         component: () => import('/@/views/user/index.vue')
+      },
+      {
+        path: 'detail',
+        name: 'detail',
+        meta: { keepAlive: false, isLabel: true },
+        component: () => import('/@/views/detail/index.vue')
       }
     ]
   },

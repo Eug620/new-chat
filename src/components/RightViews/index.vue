@@ -1,7 +1,7 @@
 <!--
  * @Author       : Eug
  * @Date         : 2021-11-22 11:22:48
- * @LastEditTime : 2021-11-25 19:36:08
+ * @LastEditTime : 2021-11-30 15:14:03
  * @LastEditors  : Eug
  * @Descripttion : Descripttion
  * @FilePath     : /new-chat/src/components/RightViews/index.vue
@@ -9,9 +9,11 @@
 <template>
   <el-affix class="chat-home-right-views" :offset="useOffset">
     <!-- 项目信息 -->
-    <ProjectInformation/>
+    <ProjectInformation v-if="props.isShowProjectInformation"/>
     <!-- 系统信息 -->
-    <SystemInformation/>
+    <SystemInformation v-if="props.isShowSystemInformation"/>
+    <!-- 自定义信息 -->
+    <PropsInformation v-if="props.isShowPropsInformation" :PropsInformationInfo="PropsInformationInfo"/>
   </el-affix>
 </template>
 
@@ -21,13 +23,31 @@ import { storeToRefs } from "pinia";
 import { useHomeStore } from "/@/store/Home";
 import ProjectInformation from './ProjectInformation.vue'
 import SystemInformation from './SystemInformation.vue'
-
+import PropsInformation from './PropsInformation.vue'
+const props = defineProps({
+  isShowProjectInformation: {
+    type: Boolean,
+    default: false
+  },
+  isShowSystemInformation: {
+    type: Boolean,
+    default: false
+  },
+  isShowPropsInformation: {
+    type: Boolean,
+    default: false
+  },
+  PropsInformationInfo: {
+    type: Object
+  },
+});
 const HomeStore = useHomeStore();
 const {
   classificationHeight,
   getTopHeightSum
 } = storeToRefs(HomeStore);
 const useIsShow = inject('useIsShow')
+
 
 const useOffset = computed(() => {
   return useIsShow.value ? classificationHeight.value + 10 : getTopHeightSum.value + 10
