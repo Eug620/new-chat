@@ -1,7 +1,7 @@
 /* 
  * @Author       : Eug
  * @Date         : 2021-11-22 11:16:22
- * @LastEditTime : 2021-11-23 12:07:19
+ * @LastEditTime : 2021-12-01 14:56:46
  * @LastEditors  : Eug
  * @Descripttion : Descripttion
  * @FilePath     : /new-chat/src/store/Home/index.js
@@ -12,7 +12,8 @@ export const useHomeStore = defineStore({
   id: 'HomeStore',
   state: () => ({
     navigationHeight: 60,
-    navigationOptions: ['首页', '沸点', '资讯', '小册', '活动', '开发者大会'],
+    // navigationOptions: ['首页', '沸点', '资讯', '小册', '活动', '开发者大会'],
+    navigationOptions: ['首页', '测试1', '测试2'],
     classificationHeight: 45,
     classificationOptions:[
       {

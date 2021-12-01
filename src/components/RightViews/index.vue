@@ -1,13 +1,15 @@
 <!--
  * @Author       : Eug
  * @Date         : 2021-11-22 11:22:48
- * @LastEditTime : 2021-11-30 15:14:03
+ * @LastEditTime : 2021-12-01 11:44:26
  * @LastEditors  : Eug
  * @Descripttion : Descripttion
  * @FilePath     : /new-chat/src/components/RightViews/index.vue
 -->
 <template>
   <el-affix class="chat-home-right-views" :offset="useOffset">
+    <!-- 用户信息 -->
+    <UserInformation/>
     <!-- 项目信息 -->
     <ProjectInformation v-if="props.isShowProjectInformation"/>
     <!-- 系统信息 -->
@@ -24,6 +26,7 @@ import { useHomeStore } from "/@/store/Home";
 import ProjectInformation from './ProjectInformation.vue'
 import SystemInformation from './SystemInformation.vue'
 import PropsInformation from './PropsInformation.vue'
+import UserInformation from './UserInformation.vue'
 const props = defineProps({
   isShowProjectInformation: {
     type: Boolean,

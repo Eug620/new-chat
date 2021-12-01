@@ -39,8 +39,11 @@ import { ref, onMounted, onBeforeMount, computed, watch, provide } from "vue";
 import { storeToRefs } from "pinia";
 import { useHomeStore } from "/@/store/Home";
 import { useRouteStore } from "/@/store/Route";
+import { useUserStore } from "/@/store/User";
 const HomeStore = useHomeStore();
 const RouteStore = useRouteStore()
+const UserStore = useUserStore();
+
 const { getRouteMetaIsLabel, storeRouter: { value } } = storeToRefs(RouteStore)
 
 const {
@@ -51,6 +54,7 @@ const {
   getTransformNavigationHeight,
   getLayoutWidth
 } = storeToRefs(HomeStore);
+UserStore.refreshUserInfo();
 
 const useTopHeight = computed(() => {
   return getRouteMetaIsLabel.value ? getNavigationHeight.value : getTopHeight.value
